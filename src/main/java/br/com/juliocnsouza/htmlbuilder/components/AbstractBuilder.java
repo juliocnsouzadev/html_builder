@@ -1,4 +1,4 @@
-package br.com.juliocnsouza.htmlbuilder;
+package br.com.juliocnsouza.htmlbuilder.components;
 
 /**
  *

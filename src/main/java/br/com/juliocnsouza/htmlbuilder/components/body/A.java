@@ -1,12 +1,10 @@
-package br.com.juliocnsouza.htmlbuilder.components;
-
-import br.com.juliocnsouza.htmlbuilder.HtmlComponent;
+package br.com.juliocnsouza.htmlbuilder.components.body;
 
 /**
  *
  * @author julio
  */
-public class A extends HtmlComponent {
+public class A extends HtmlComponentBuilder {
 
     private final String href;
 

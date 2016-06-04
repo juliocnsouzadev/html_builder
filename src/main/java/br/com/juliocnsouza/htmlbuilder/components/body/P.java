@@ -1,22 +1,20 @@
-package br.com.juliocnsouza.htmlbuilder.components;
-
-import br.com.juliocnsouza.htmlbuilder.HtmlComponent;
+package br.com.juliocnsouza.htmlbuilder.components.body;
 
 /**
  *
  * @author julio
  */
-public class Div extends HtmlComponent {
+public class P extends HtmlComponentBuilder {
 
     @Override
     public String build() {
         return getBuilder()
-                .append( "<div " )
+                .append( "<p " )
                 .append( getAttributes() )
                 .append( ">" )
                 .append( getComponentContent() )
                 .append( buildComponents() )
-                .append( "</div>" )
+                .append( "</p>" )
                 .toString();
     }
 

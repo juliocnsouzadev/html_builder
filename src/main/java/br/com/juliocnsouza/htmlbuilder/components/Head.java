@@ -1,6 +1,5 @@
 package br.com.juliocnsouza.htmlbuilder.components;
 
-import br.com.juliocnsouza.htmlbuilder.AbstractBuilder;
 import java.util.ArrayList;
 import java.util.List;
 

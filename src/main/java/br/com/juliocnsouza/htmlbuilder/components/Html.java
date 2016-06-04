@@ -1,7 +1,6 @@
 package br.com.juliocnsouza.htmlbuilder.components;
 
-import br.com.juliocnsouza.htmlbuilder.AbstractBuilder;
-import br.com.juliocnsouza.htmlbuilder.HtmlComponent;
+import br.com.juliocnsouza.htmlbuilder.components.body.HtmlComponentBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
 public class Html extends AbstractBuilder {
 
     private final Head head;
-    private final List<HtmlComponent> components;
+    private final List<HtmlComponentBuilder> components;
     private final List<String> scripts;
     private final List<String> links;
 
@@ -27,7 +26,7 @@ public class Html extends AbstractBuilder {
         return head;
     }
 
-    public Html addComponent( HtmlComponent component ) {
+    public Html addComponent( HtmlComponentBuilder component ) {
         if ( component == null ) {
             return this;
         }

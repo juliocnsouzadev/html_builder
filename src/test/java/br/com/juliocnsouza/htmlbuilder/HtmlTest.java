@@ -1,18 +1,19 @@
 package br.com.juliocnsouza.htmlbuilder;
 
-import br.com.juliocnsouza.htmlbuilder.cdn.Bootstrap;
-import br.com.juliocnsouza.htmlbuilder.components.A;
-import br.com.juliocnsouza.htmlbuilder.components.Div;
-import br.com.juliocnsouza.htmlbuilder.components.H;
+import br.com.juliocnsouza.htmlbuilder.components.body.HtmlComponentBuilder;
+import br.com.juliocnsouza.htmlbuilder.bootstrap.CDN;
+import br.com.juliocnsouza.htmlbuilder.components.body.A;
+import br.com.juliocnsouza.htmlbuilder.components.body.Div;
+import br.com.juliocnsouza.htmlbuilder.components.body.H;
 import br.com.juliocnsouza.htmlbuilder.components.Html;
-import br.com.juliocnsouza.htmlbuilder.components.P;
+import br.com.juliocnsouza.htmlbuilder.components.body.P;
 import br.com.juliocnsouza.htmlbuilder.util.AssetReader;
 import br.com.juliocnsouza.htmlbuilder.util.Writer;
 import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static br.com.juliocnsouza.htmlbuilder.classes.Classes.*;
+import static br.com.juliocnsouza.htmlbuilder.bootstrap.Classes.*;
 
 public class HtmlTest {
 
@@ -25,8 +26,8 @@ public class HtmlTest {
         Html html = new Html();
         html.getHead().addTitle( "HTML Java" );
         html.getHead().addMetaTag( "pragma" , "no-cache" );
-        html.getHead().addStyleSheet( Bootstrap.CSS );
-        html.addLinkJS( Bootstrap.JS );
+        html.getHead().addStyleSheet(CDN.CSS );
+        html.addLinkJS(CDN.JS );
 
         Div container = new Div();
         container.setClass( "container" );
@@ -92,31 +93,31 @@ public class HtmlTest {
         Assert.assertTrue( htmlTxt != null );
     }
 
-    private HtmlComponent getContainer() {
+    private HtmlComponentBuilder getContainer() {
         return new Div()
                 .setBootstrapClasses( CONTAINER )
                 .addComponent( getHeader() )
                 .addComponent( getBody() );
     }
 
-    private HtmlComponent getHeader() {
+    private HtmlComponentBuilder getHeader() {
         return new Div()
                 .setBootstrapClasses( JUMBOTRON )
                 .addComponent( getTitle() ).
                 addComponent( getTitleParagrath() );
     }
 
-    private HtmlComponent getTitle() {
+    private HtmlComponentBuilder getTitle() {
         return new H( H.Type.H1 )
                 .setComponentContent( "Java HTML Builder With Bootstrap" );
     }
 
-    private HtmlComponent getTitleParagrath() {
+    private HtmlComponentBuilder getTitleParagrath() {
         return new P()
                 .setComponentContent( "You can buid nice html generated emails" );
     }
 
-    private HtmlComponent getBody() {
+    private HtmlComponentBuilder getBody() {
         return new Div()
                 .addComponent( new Div()
                         .setBootstrapClasses( ROW )

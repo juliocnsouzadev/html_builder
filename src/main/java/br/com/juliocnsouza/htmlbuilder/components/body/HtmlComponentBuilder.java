@@ -1,6 +1,7 @@
-package br.com.juliocnsouza.htmlbuilder;
+package br.com.juliocnsouza.htmlbuilder.components.body;
 
-import br.com.juliocnsouza.htmlbuilder.classes.Classes;
+import br.com.juliocnsouza.htmlbuilder.bootstrap.Classes;
+import br.com.juliocnsouza.htmlbuilder.components.AbstractBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author julio
  */
-public abstract class HtmlComponent extends AbstractBuilder {
+public abstract class HtmlComponentBuilder extends AbstractBuilder {
 
     private String accesskey;
     private String align;
@@ -32,13 +33,13 @@ public abstract class HtmlComponent extends AbstractBuilder {
     private String valign;
     private String width;
     private String componentContent;
-    private final List<HtmlComponent> components;
+    private final List<HtmlComponentBuilder> components;
 
-    public HtmlComponent() {
+    public HtmlComponentBuilder() {
         components = new ArrayList<>();
     }
 
-    public HtmlComponent addComponent( HtmlComponent component ) {
+    public HtmlComponentBuilder addComponent( HtmlComponentBuilder component ) {
         if ( component != null ) {
             components.add( component );
         }
@@ -137,21 +138,21 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return width;
     }
 
-    public HtmlComponent setAccesskey( String accesskey ) {
+    public HtmlComponentBuilder setAccesskey( String accesskey ) {
         if ( accesskey != null ) {
             this.accesskey = "accesskey=\"" + accesskey + "\"";
         }
         return this;
     }
 
-    public HtmlComponent setAlign( String align ) {
+    public HtmlComponentBuilder setAlign( String align ) {
         if ( align != null ) {
             this.align = "align=\"" + align + "\"";
         }
         return this;
     }
 
-    public HtmlComponent setBackground( String background ) {
+    public HtmlComponentBuilder setBackground( String background ) {
         if ( background == null ) {
             return this;
         }
@@ -159,7 +160,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setBgcolor( String bgcolor ) {
+    public HtmlComponentBuilder setBgcolor( String bgcolor ) {
         if ( bgcolor == null ) {
             return this;
         }
@@ -167,7 +168,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setClass( String _class ) {
+    public HtmlComponentBuilder setClass( String _class ) {
         if ( _class == null ) {
             return this;
         }
@@ -175,7 +176,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setBootstrapClasses( Classes... classes ) {
+    public HtmlComponentBuilder setBootstrapClasses( Classes... classes ) {
         if ( classes == null ) {
             return this;
         }
@@ -191,7 +192,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setContenteditable( String contenteditable ) {
+    public HtmlComponentBuilder setContenteditable( String contenteditable ) {
         if ( contenteditable == null ) {
             return this;
         }
@@ -199,7 +200,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setContextmenu( String contextmenu ) {
+    public HtmlComponentBuilder setContextmenu( String contextmenu ) {
         if ( contextmenu == null ) {
             return this;
         }
@@ -207,7 +208,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setDraggable( String draggable ) {
+    public HtmlComponentBuilder setDraggable( String draggable ) {
         if ( draggable == null ) {
             return this;
         }
@@ -215,7 +216,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setHeight( String height ) {
+    public HtmlComponentBuilder setHeight( String height ) {
         if ( height == null ) {
             return this;
         }
@@ -223,7 +224,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setHidden( String hidden ) {
+    public HtmlComponentBuilder setHidden( String hidden ) {
         if ( hidden == null ) {
             return this;
         }
@@ -231,7 +232,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setId( String id ) {
+    public HtmlComponentBuilder setId( String id ) {
         if ( id == null ) {
             return this;
         }
@@ -239,7 +240,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setItem( String item ) {
+    public HtmlComponentBuilder setItem( String item ) {
         if ( item == null ) {
             return this;
         }
@@ -247,7 +248,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setItemprop( String itemprop ) {
+    public HtmlComponentBuilder setItemprop( String itemprop ) {
         if ( itemprop == null ) {
             return this;
         }
@@ -255,7 +256,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setSpellcheck( String spellcheck ) {
+    public HtmlComponentBuilder setSpellcheck( String spellcheck ) {
         if ( spellcheck == null ) {
             return this;
         }
@@ -263,7 +264,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setStyle( String style ) {
+    public HtmlComponentBuilder setStyle( String style ) {
         if ( style == null ) {
             return this;
         }
@@ -271,7 +272,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setSubject( String subject ) {
+    public HtmlComponentBuilder setSubject( String subject ) {
         if ( subject == null ) {
             return this;
         }
@@ -279,7 +280,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setTabindex( String tabindex ) {
+    public HtmlComponentBuilder setTabindex( String tabindex ) {
         if ( tabindex == null ) {
             return this;
         }
@@ -287,7 +288,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setTitle( String title ) {
+    public HtmlComponentBuilder setTitle( String title ) {
         if ( title == null ) {
             return this;
         }
@@ -295,7 +296,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setValign( String valign ) {
+    public HtmlComponentBuilder setValign( String valign ) {
         if ( valign == null ) {
             return this;
         }
@@ -303,7 +304,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponent setWidth( String width ) {
+    public HtmlComponentBuilder setWidth( String width ) {
         if ( width == null ) {
             return this;
         }
@@ -317,7 +318,7 @@ public abstract class HtmlComponent extends AbstractBuilder {
                : componentContent;
     }
 
-    public HtmlComponent setComponentContent( String componentContent ) {
+    public HtmlComponentBuilder setComponentContent( String componentContent ) {
         if ( componentContent == null ) {
             return this;
         }

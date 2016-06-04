@@ -1,12 +1,10 @@
-package br.com.juliocnsouza.htmlbuilder.components;
-
-import br.com.juliocnsouza.htmlbuilder.HtmlComponent;
+package br.com.juliocnsouza.htmlbuilder.components.body;
 
 /**
  *
  * @author julio
  */
-public class H extends HtmlComponent {
+public class H extends HtmlComponentBuilder {
 
     private final Type type;
 
