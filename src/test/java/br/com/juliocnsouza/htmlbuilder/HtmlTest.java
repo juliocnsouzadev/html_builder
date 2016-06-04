@@ -1,11 +1,11 @@
 package br.com.juliocnsouza.htmlbuilder;
 
-import br.com.juliocnsouza.htmlbuilder.components.body.HtmlComponentBuilder;
 import br.com.juliocnsouza.htmlbuilder.bootstrap.CDN;
+import br.com.juliocnsouza.htmlbuilder.components.Html;
 import br.com.juliocnsouza.htmlbuilder.components.body.A;
 import br.com.juliocnsouza.htmlbuilder.components.body.Div;
 import br.com.juliocnsouza.htmlbuilder.components.body.H;
-import br.com.juliocnsouza.htmlbuilder.components.Html;
+import br.com.juliocnsouza.htmlbuilder.components.body.HtmlComponentBuilder;
 import br.com.juliocnsouza.htmlbuilder.components.body.P;
 import br.com.juliocnsouza.htmlbuilder.util.AssetReader;
 import br.com.juliocnsouza.htmlbuilder.util.Writer;
@@ -22,72 +22,39 @@ public class HtmlTest {
 
     @Test
     public void testBuildWithCDN() {
-        System.out.println( "build cdn" );
-        Html html = new Html();
-        html.getHead().addTitle( "HTML Java" );
-        html.getHead().addMetaTag( "pragma" , "no-cache" );
-        html.getHead().addStyleSheet(CDN.CSS );
-        html.addLinkJS(CDN.JS );
+        System.out.println( "build with cdn" );
 
-        Div container = new Div();
-        container.setClass( "container" );
-
-        Div row = new Div();
-        row.setBootstrapClasses( ROW , BTN_DANGER );
-        row.setStyle( "padding:50px" );
-
-        Div col1 = new Div();
-        col1.setBootstrapClasses( COL_LG_4 , BTN_INFO );
-        H h1 = new H( H.Type.H1 );
-        h1.setComponentContent( "colum 01" );
-        col1.addComponent( h1 );
-
-        Div col2 = new Div();
-        col2.setBootstrapClasses( COL_LG_4 , BTN_SUCCESS );
-        H h2 = new H( H.Type.H1 );
-        h2.setComponentContent( "colum 02" );
-        col2.addComponent( h2 );
-
-        Div col3 = new Div();
-        col3.setBootstrapClasses( COL_LG_4 , BTN_PRIMARY );
-        H h3 = new H( H.Type.H1 );
-        h3.setComponentContent( "colum 03" );
-        col3.addComponent( h3 );
-
-        row.addComponent( col1 );
-        row.addComponent( col2 );
-        row.addComponent( col3 );
-
-        container.addComponent( row );
-
-        html.addComponent( container );
+        Html html = new Html()
+                .addScript( CDN.JS )
+                .addComponent( getContainer() );
+        html.getHead()
+                .addTitle( "HTML Java" )
+                .addMetaTag( "pragma" , "no-cache" )
+                .addStyle( CDN.CSS );
 
         String htmlTxt = html.build();
-        System.out.println( "html" );
         System.out.println( htmlTxt );
         Assert.assertTrue( htmlTxt != null );
     }
 
     @Test
-    public void testBuildWithFile()
+    public void testBuildWithReadedAssets()
             throws Exception {
 
         AssetReader css = new AssetReader( "src\\main\\resources\\META-INF\\bootstrap\\css\\bootstrap.min.css" , true );
         AssetReader js = new AssetReader( "src\\main\\resources\\META-INF\\bootstrap\\js\\bootstrap.min.js" , true );
 
-        System.out.println( "build with file" );
-        Html html = new Html();
+        System.out.println( "build with readed assets" );
+
+        Html html = new Html()
+                .addScript( js.getFileContent() )
+                .addComponent( getContainer() );
         html.getHead()
                 .addTitle( "HTML Java" )
                 .addMetaTag( "pragma" , "no-cache" )
                 .addStyle( css.getFileContent() );
 
-        html
-                .addScript( js.getFileContent() )
-                .addComponent( getContainer() );
-
         String htmlTxt = html.build();
-        System.out.println( "html" );
         System.out.println( htmlTxt );
         Writer.write( "test" , "html" , Arrays.asList( htmlTxt ) );
         Assert.assertTrue( htmlTxt != null );
