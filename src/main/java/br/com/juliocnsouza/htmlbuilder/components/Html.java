@@ -27,25 +27,28 @@ public class Html extends AbstractBuilder {
         return head;
     }
 
-    public void addComponent( HtmlComponent component ) {
+    public Html addComponent( HtmlComponent component ) {
         if ( component == null ) {
-            return;
+            return this;
         }
         components.add( component );
+        return this;
     }
 
-    public void addScript( String script ) {
+    public Html addScript( String script ) {
         if ( script == null ) {
-            return;
+            return this;
         }
         scripts.add( "<script>" + script + "</script>" );
+        return this;
     }
 
-    public void addLinkJS( String src ) {
+    public Html addLinkJS( String src ) {
         if ( src == null ) {
-            return;
+            return this;
         }
         links.add( "<script type=\"text/javascript\" src=\"" + src + "\"></script>" );
+        return this;
     }
 
     @Override

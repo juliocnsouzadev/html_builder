@@ -24,28 +24,32 @@ public class Head extends AbstractBuilder {
         links = new ArrayList<>();
     }
 
-    public void addMetaTag( String name , String content ) {
+    public Head addMetaTag( String name , String content ) {
         if ( name != null && content != null ) {
             metaTags.add( "<meta name=\"" + name + "\" content=\"" + content + "\">" );
         }
+        return this;
     }
 
-    public void addTitle( String title ) {
+    public Head addTitle( String title ) {
         if ( title != null ) {
             this.title = "<title>" + title + "</title>";
         }
+        return this;
     }
 
-    public void addStyle( String style ) {
+    public Head addStyle( String style ) {
         if ( style != null ) {
             this.style = "<style>" + style + "</style>";
         }
+        return this;
     }
 
-    public void addStyleSheet( String href ) {
+    public Head addStyleSheet( String href ) {
         if ( href != null ) {
             links.add( "<link rel=\"stylesheet\" href=\"" + href + "\">" );
         }
+        return this;
     }
 
     @Override

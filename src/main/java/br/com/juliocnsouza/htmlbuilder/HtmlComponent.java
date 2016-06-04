@@ -38,11 +38,11 @@ public abstract class HtmlComponent extends AbstractBuilder {
         components = new ArrayList<>();
     }
 
-    public void addComponent( HtmlComponent component ) {
-        if ( component == null ) {
-            return;
+    public HtmlComponent addComponent( HtmlComponent component ) {
+        if ( component != null ) {
+            components.add( component );
         }
-        components.add( component );
+        return this;
     }
 
     protected String buildComponents() {
@@ -137,44 +137,47 @@ public abstract class HtmlComponent extends AbstractBuilder {
         return width;
     }
 
-    public void setAccesskey( String accesskey ) {
-        if ( accesskey == null ) {
-            return;
+    public HtmlComponent setAccesskey( String accesskey ) {
+        if ( accesskey != null ) {
+            this.accesskey = "accesskey=\"" + accesskey + "\"";
         }
-        this.accesskey = "accesskey=\"" + accesskey + "\"";
+        return this;
     }
 
-    public void setAlign( String align ) {
-        if ( align == null ) {
-            return;
+    public HtmlComponent setAlign( String align ) {
+        if ( align != null ) {
+            this.align = "align=\"" + align + "\"";
         }
-        this.align = "align=\"" + align + "\"";
+        return this;
     }
 
-    public void setBackground( String background ) {
+    public HtmlComponent setBackground( String background ) {
         if ( background == null ) {
-            return;
+            return this;
         }
         this.background = "background=\"" + background + "\"";
+        return this;
     }
 
-    public void setBgcolor( String bgcolor ) {
+    public HtmlComponent setBgcolor( String bgcolor ) {
         if ( bgcolor == null ) {
-            return;
+            return this;
         }
         this.bgcolor = "bgcolor=\"" + bgcolor + "\"";
+        return this;
     }
 
-    public void setClass( String _class ) {
+    public HtmlComponent setClass( String _class ) {
         if ( _class == null ) {
-            return;
+            return this;
         }
         this._class = "class=\"" + _class + "\"";
+        return this;
     }
 
-    public void setBootstrapClasses( Classes... classes ) {
+    public HtmlComponent setBootstrapClasses( Classes... classes ) {
         if ( classes == null ) {
-            return;
+            return this;
         }
         StringBuilder builder = new StringBuilder( "class=\"" );
         for ( Classes bootClazz : classes ) {
@@ -185,111 +188,127 @@ public abstract class HtmlComponent extends AbstractBuilder {
         }
         builder.append( "\"" );
         this._class = builder.toString();
+        return this;
     }
 
-    public void setContenteditable( String contenteditable ) {
+    public HtmlComponent setContenteditable( String contenteditable ) {
         if ( contenteditable == null ) {
-            return;
+            return this;
         }
         this.contenteditable = "contenteditable=\"" + contenteditable + "\"";
+        return this;
     }
 
-    public void setContextmenu( String contextmenu ) {
+    public HtmlComponent setContextmenu( String contextmenu ) {
         if ( contextmenu == null ) {
-            return;
+            return this;
         }
         this.contextmenu = "contextmenu=\"" + contextmenu + "\"";
+        return this;
     }
 
-    public void setDraggable( String draggable ) {
+    public HtmlComponent setDraggable( String draggable ) {
         if ( draggable == null ) {
-            return;
+            return this;
         }
         this.draggable = "draggable=\"" + draggable + "\"";
+        return this;
     }
 
-    public void setHeight( String height ) {
+    public HtmlComponent setHeight( String height ) {
         if ( height == null ) {
-            return;
+            return this;
         }
         this.height = "height=\"" + height + "\"";
+        return this;
     }
 
-    public void setHidden( String hidden ) {
+    public HtmlComponent setHidden( String hidden ) {
         if ( hidden == null ) {
-            return;
+            return this;
         }
         this.hidden = "hidden=\"" + hidden + "\"";
+        return this;
     }
 
-    public void setId( String id ) {
+    public HtmlComponent setId( String id ) {
         if ( id == null ) {
-            return;
+            return this;
         }
         this.id = "hidden=\"" + id + "\"";
+        return this;
     }
 
-    public void setItem( String item ) {
+    public HtmlComponent setItem( String item ) {
         if ( item == null ) {
-            return;
+            return this;
         }
         this.item = "item=\"" + item + "\"";
+        return this;
     }
 
-    public void setItemprop( String itemprop ) {
+    public HtmlComponent setItemprop( String itemprop ) {
         if ( itemprop == null ) {
-            return;
+            return this;
         }
         this.itemprop = "itemprop=\"" + itemprop + "\"";
+        return this;
     }
 
-    public void setSpellcheck( String spellcheck ) {
+    public HtmlComponent setSpellcheck( String spellcheck ) {
         if ( spellcheck == null ) {
-            return;
+            return this;
         }
         this.spellcheck = "spellcheck=\"" + spellcheck + "\"";
+        return this;
     }
 
-    public void setStyle( String style ) {
+    public HtmlComponent setStyle( String style ) {
         if ( style == null ) {
-            return;
+            return this;
         }
         this.style = "style=\"" + style + "\"";
+        return this;
     }
 
-    public void setSubject( String subject ) {
+    public HtmlComponent setSubject( String subject ) {
         if ( subject == null ) {
-            return;
+            return this;
         }
         this.subject = "subject=\"" + subject + "\"";
+        return this;
     }
 
-    public void setTabindex( String tabindex ) {
+    public HtmlComponent setTabindex( String tabindex ) {
         if ( tabindex == null ) {
-            return;
+            return this;
         }
         this.tabindex = "tabindex=\"" + tabindex + "\"";
+        return this;
     }
 
-    public void setTitle( String title ) {
+    public HtmlComponent setTitle( String title ) {
         if ( title == null ) {
-            return;
+            return this;
         }
         this.title = "title=\"" + tabindex + "\"";
+        return this;
     }
 
-    public void setValign( String valign ) {
+    public HtmlComponent setValign( String valign ) {
         if ( valign == null ) {
-            return;
+            return this;
         }
         this.valign = "valign=\"" + valign + "\"";
+        return this;
     }
 
-    public void setWidth( String width ) {
+    public HtmlComponent setWidth( String width ) {
         if ( width == null ) {
-            return;
+            return this;
         }
         this.width = "width=\"" + valign + "\"";
+        return this;
     }
 
     public String getComponentContent() {
@@ -298,11 +317,12 @@ public abstract class HtmlComponent extends AbstractBuilder {
                : componentContent;
     }
 
-    public void setComponentContent( String componentContent ) {
+    public HtmlComponent setComponentContent( String componentContent ) {
         if ( componentContent == null ) {
-            return;
+            return this;
         }
         this.componentContent = componentContent;
+        return this;
     }
 
     public String getAttributes() {

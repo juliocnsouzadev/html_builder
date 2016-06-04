@@ -1,13 +1,18 @@
 package br.com.juliocnsouza.htmlbuilder;
 
 import br.com.juliocnsouza.htmlbuilder.cdn.Bootstrap;
-import br.com.juliocnsouza.htmlbuilder.classes.Classes;
+import br.com.juliocnsouza.htmlbuilder.components.A;
 import br.com.juliocnsouza.htmlbuilder.components.Div;
 import br.com.juliocnsouza.htmlbuilder.components.H;
 import br.com.juliocnsouza.htmlbuilder.components.Html;
+import br.com.juliocnsouza.htmlbuilder.components.P;
 import br.com.juliocnsouza.htmlbuilder.util.AssetReader;
+import br.com.juliocnsouza.htmlbuilder.util.Writer;
+import java.util.Arrays;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static br.com.juliocnsouza.htmlbuilder.classes.Classes.*;
 
 public class HtmlTest {
 
@@ -27,23 +32,23 @@ public class HtmlTest {
         container.setClass( "container" );
 
         Div row = new Div();
-        row.setBootstrapClasses( Classes.ROW , Classes.BTN_DANGER );
+        row.setBootstrapClasses( ROW , BTN_DANGER );
         row.setStyle( "padding:50px" );
 
         Div col1 = new Div();
-        col1.setBootstrapClasses( Classes.COL_LG_4 , Classes.BTN_INFO );
+        col1.setBootstrapClasses( COL_LG_4 , BTN_INFO );
         H h1 = new H( H.Type.H1 );
         h1.setComponentContent( "colum 01" );
         col1.addComponent( h1 );
 
         Div col2 = new Div();
-        col2.setBootstrapClasses( Classes.COL_LG_4 , Classes.BTN_SUCCESS );
+        col2.setBootstrapClasses( COL_LG_4 , BTN_SUCCESS );
         H h2 = new H( H.Type.H1 );
         h2.setComponentContent( "colum 02" );
         col2.addComponent( h2 );
 
         Div col3 = new Div();
-        col3.setBootstrapClasses( Classes.COL_LG_4 , Classes.BTN_PRIMARY );
+        col3.setBootstrapClasses( COL_LG_4 , BTN_PRIMARY );
         H h3 = new H( H.Type.H1 );
         h3.setComponentContent( "colum 03" );
         col3.addComponent( h3 );
@@ -71,35 +76,79 @@ public class HtmlTest {
 
         System.out.println( "build with file" );
         Html html = new Html();
-        html.getHead().addTitle( "HTML Java" );
-        html.getHead().addMetaTag( "pragma" , "no-cache" );
-        html.getHead().addStyle( css.getFileContent() );
-        html.addScript( js.getFileContent() );
+        html.getHead()
+                .addTitle( "HTML Java" )
+                .addMetaTag( "pragma" , "no-cache" )
+                .addStyle( css.getFileContent() );
 
-        Div container = new Div();
-        container.setClass( "container" );
-
-        Div div1 = new Div();
-        div1.setComponentContent( "Div 1" );
-        div1.setClass( "jumbotron" );
-        div1.setBackground( "#F44336" );
-        div1.setStyle( "width:20%" );
-
-        Div div2 = new Div();
-        div2.setComponentContent( "Div 2" );
-        div2.setBackground( "#F44336" );
-        div2.setClass( "btn btn-block btn-primary" );
-        div2.setStyle( "width:30%" );
-
-        container.addComponent( div1 );
-        container.addComponent( div2 );
-
-        html.addComponent( container );
+        html
+                .addScript( js.getFileContent() )
+                .addComponent( getContainer() );
 
         String htmlTxt = html.build();
         System.out.println( "html" );
         System.out.println( htmlTxt );
+        Writer.write( "test" , "html" , Arrays.asList( htmlTxt ) );
         Assert.assertTrue( htmlTxt != null );
+    }
+
+    private HtmlComponent getContainer() {
+        return new Div()
+                .setBootstrapClasses( CONTAINER )
+                .addComponent( getHeader() )
+                .addComponent( getBody() );
+    }
+
+    private HtmlComponent getHeader() {
+        return new Div()
+                .setBootstrapClasses( JUMBOTRON )
+                .addComponent( getTitle() ).
+                addComponent( getTitleParagrath() );
+    }
+
+    private HtmlComponent getTitle() {
+        return new H( H.Type.H1 )
+                .setComponentContent( "Java HTML Builder With Bootstrap" );
+    }
+
+    private HtmlComponent getTitleParagrath() {
+        return new P()
+                .setComponentContent( "You can buid nice html generated emails" );
+    }
+
+    private HtmlComponent getBody() {
+        return new Div()
+                .addComponent( new Div()
+                        .setBootstrapClasses( ROW )
+                        .setStyle( "padding:10px" )
+                        .addComponent( new Div()
+                                .setBootstrapClasses( COL_LG_4 )
+                                .setStyle( "text-align:center" )
+                                .addComponent( new H( H.Type.H2 )
+                                        .setComponentContent( "Simple Columm col-lg-4" ) ) )
+                        .addComponent( new A( "github.com" , "Click ;)" )
+                                .setBootstrapClasses( COL_LG_4 , BTN , BTN_LG , BTN_PRIMARY )
+                                .setStyle( "text-align:center" ) )
+                        .addComponent( new Div()
+                                .setBootstrapClasses( COL_LG_4 )
+                                .setStyle( "padding:2px" )
+                                .addComponent( new P()
+                                        .setComponentContent( getLoremIpsum() ) ) ) )
+                .addComponent( new Div()
+                        .setBootstrapClasses( ROW )
+                        .setStyle( "padding:10px" )
+                        .addComponent( new A( "github.com" , "Click ;)" )
+                                .setBootstrapClasses( COL_LG_4 , BTN , BTN_LG , BTN_INFO )
+                                .setStyle( "text-align:center" ) )
+                        .addComponent( new Div()
+                                .setBootstrapClasses( COL_LG_6 )
+                                .setStyle( "padding:2px" )
+                                .addComponent( new P()
+                                        .setComponentContent( getLoremIpsum() ) ) ) );
+    }
+
+    private static String getLoremIpsum() {
+        return "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
     }
 
 }
