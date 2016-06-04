@@ -4,6 +4,6 @@
 
 ###Usefull for creating emails dynamically.
 
-![alt tag](https://raw.githubusercontent.com/juliocnsouzadev/JavaHTMLBuilder/master/example_generated_html)
+![alt tag](https://github.com/juliocnsouzadev/JavaHTMLBuilder/blob/master/example_generated_html.png)
 
 
