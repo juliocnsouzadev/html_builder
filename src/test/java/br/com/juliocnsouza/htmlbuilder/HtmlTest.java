@@ -21,7 +21,8 @@ public class HtmlTest {
     }
 
     @Test
-    public void testBuildWithCDN() {
+    public void testBuildWithCDN()
+            throws Exception {
         System.out.println( "build with cdn" );
 
         Html html = new Html()
@@ -33,12 +34,12 @@ public class HtmlTest {
                 .addStyle( CDN.CSS );
 
         String htmlTxt = html.build();
-        System.out.println( htmlTxt );
+        Writer.write( "test_cdn" , "html" , Arrays.asList( htmlTxt ) );
         Assert.assertTrue( htmlTxt != null );
     }
 
     @Test
-    public void testBuildWithReadedAssets()
+    public void testBuildWithReadAssets()
             throws Exception {
 
         AssetReader css = new AssetReader( "src\\main\\resources\\META-INF\\bootstrap\\css\\bootstrap.min.css" , true );
@@ -55,8 +56,7 @@ public class HtmlTest {
                 .addStyle( css.getFileContent() );
 
         String htmlTxt = html.build();
-        System.out.println( htmlTxt );
-        Writer.write( "test" , "html" , Arrays.asList( htmlTxt ) );
+        Writer.write( "test_assets_incorporated" , "html" , Arrays.asList( htmlTxt ) );
         Assert.assertTrue( htmlTxt != null );
     }
 
