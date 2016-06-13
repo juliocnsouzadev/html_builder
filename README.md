@@ -1,6 +1,6 @@
 # Java HTML Builder
 
-##A library for wrinting html files in java, usefull for creating emails dynamicall
+##A library for writing html files in java, usefull for creating emails dynamicall
 
 
 
