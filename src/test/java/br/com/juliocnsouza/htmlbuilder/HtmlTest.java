@@ -1,6 +1,7 @@
 package br.com.juliocnsouza.htmlbuilder;
 
 import br.com.juliocnsouza.htmlbuilder.bootstrap.CDN;
+import br.com.juliocnsouza.htmlbuilder.bootstrap.Classes;
 import br.com.juliocnsouza.htmlbuilder.components.Html;
 import br.com.juliocnsouza.htmlbuilder.components.body.A;
 import br.com.juliocnsouza.htmlbuilder.components.body.Div;
@@ -39,6 +40,32 @@ public class HtmlTest {
     }
 
     @Test
+    public void testBuildAllWithCDN()
+            throws Exception {
+        System.out.println( "build with all cdn" );
+
+        AssetReader css = new AssetReader( "src\\main\\resources\\META-INF\\bootstrap\\css\\bootstrap.min.css" , true );
+        AssetReader js = new AssetReader( "src\\main\\resources\\META-INF\\bootstrap\\js\\bootstrap.min.js" , true );
+
+        System.out.println( "build with readed assets" );
+
+        Html html = new Html()
+                .addScript( js.getFileContent() );
+        html.getHead()
+                .addTitle( "HTML Java" )
+                .addMetaTag( "pragma" , "no-cache" )
+                .addStyle( css.getFileContent() );
+
+        for ( Classes clazz : Classes.values() ) {
+            html.addComponent( new Div().setBootstrapClasses( true , clazz ) );
+        }
+
+        String htmlTxt = html.build();
+        Writer.write( "test_cdn_all" , "html" , Arrays.asList( htmlTxt ) );
+        Assert.assertTrue( htmlTxt != null );
+    }
+
+    @Test
     public void testBuildWithReadAssets()
             throws Exception {
 
@@ -62,14 +89,14 @@ public class HtmlTest {
 
     private HtmlComponentBuilder getContainer() {
         return new Div()
-                .setBootstrapClasses( CONTAINER )
+                .setBootstrapClasses( true , CONTAINER )
                 .addComponent( getHeader() )
                 .addComponent( getBody() );
     }
 
     private HtmlComponentBuilder getHeader() {
         return new Div()
-                .setBootstrapClasses( JUMBOTRON )
+                .setBootstrapClasses( true , JUMBOTRON )
                 .addComponent( getTitle() ).
                 addComponent( getTitleParagrath() );
     }
@@ -87,29 +114,29 @@ public class HtmlTest {
     private HtmlComponentBuilder getBody() {
         return new Div()
                 .addComponent( new Div()
-                        .setBootstrapClasses( ROW )
+                        .setBootstrapClasses( true , ROW )
                         .setStyle( "padding:10px" )
                         .addComponent( new Div()
-                                .setBootstrapClasses( COL_LG_4 )
+                                .setBootstrapClasses( true , COL_LG_4 )
                                 .setStyle( "text-align:center" )
                                 .addComponent( new H( H.Type.H2 )
                                         .setComponentContent( "Simple Columm col-lg-4" ) ) )
                         .addComponent( new A( "github.com" , "Click ;)" )
-                                .setBootstrapClasses( COL_LG_4 , BTN , BTN_LG , BTN_PRIMARY )
+                                .setBootstrapClasses( true , COL_LG_4 , BTN , BTN_LG , BTN_PRIMARY )
                                 .setStyle( "text-align:center" ) )
                         .addComponent( new Div()
-                                .setBootstrapClasses( COL_LG_4 )
+                                .setBootstrapClasses( true , COL_LG_4 )
                                 .setStyle( "padding:2px" )
                                 .addComponent( new P()
                                         .setComponentContent( getLoremIpsum() ) ) ) )
                 .addComponent( new Div()
-                        .setBootstrapClasses( ROW )
+                        .setBootstrapClasses( true , ROW )
                         .setStyle( "padding:10px" )
                         .addComponent( new A( "github.com" , "Click ;)" )
-                                .setBootstrapClasses( COL_LG_4 , BTN , BTN_LG , BTN_INFO )
+                                .setBootstrapClasses( true , COL_LG_4 , BTN , BTN_LG , BTN_INFO )
                                 .setStyle( "text-align:center" ) )
                         .addComponent( new Div()
-                                .setBootstrapClasses( COL_LG_6 )
+                                .setBootstrapClasses( true , COL_LG_6 )
                                 .setStyle( "padding:2px" )
                                 .addComponent( new P()
                                         .setComponentContent( getLoremIpsum() ) ) ) );

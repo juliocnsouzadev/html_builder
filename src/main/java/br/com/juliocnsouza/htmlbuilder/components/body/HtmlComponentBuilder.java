@@ -1,6 +1,7 @@
 package br.com.juliocnsouza.htmlbuilder.components.body;
 
 import br.com.juliocnsouza.htmlbuilder.bootstrap.Classes;
+import br.com.juliocnsouza.htmlbuilder.bootstrap.InlineStyleConverter;
 import br.com.juliocnsouza.htmlbuilder.components.AbstractBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -176,19 +177,37 @@ public abstract class HtmlComponentBuilder extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponentBuilder setBootstrapClasses( Classes... classes ) {
+    public HtmlComponentBuilder setBootstrapClasses( boolean setInlineStyle , Classes... classes ) {
         if ( classes == null ) {
             return this;
         }
-        StringBuilder builder = new StringBuilder( "class=\"" );
+        StringBuilder classesBuilder = new StringBuilder( "class=\"" );
+        StringBuilder styleBuilder = new StringBuilder();
+        InlineStyleConverter inlineStyleConverter = new InlineStyleConverter();
         for ( Classes bootClazz : classes ) {
             if ( bootClazz == null ) {
                 continue;
             }
-            builder.append( bootClazz.getValue() ).append( " " );
+            if ( setInlineStyle ) {
+                String inlineValue = inlineStyleConverter.getMap().get( bootClazz.getValue() );
+                if ( inlineValue != null ) {
+                    styleBuilder.append( inlineValue );
+                    if ( bootClazz.getValue().contains( "col-lg" ) ) {
+                        styleBuilder.append( "float:left" );
+                    }
+                }
+            }
+            else {
+                classesBuilder.append( bootClazz.getValue() ).append( " " );
+            }
         }
-        builder.append( "\"" );
-        this._class = builder.toString();
+        classesBuilder.append( "\"" );
+        if ( setInlineStyle ) {
+            setStyle( styleBuilder.toString() );
+        }
+        else {
+            this._class = classesBuilder.toString();
+        }
         return this;
     }
 
@@ -264,11 +283,14 @@ public abstract class HtmlComponentBuilder extends AbstractBuilder {
         return this;
     }
 
-    public HtmlComponentBuilder setStyle( String style ) {
-        if ( style == null ) {
+    public HtmlComponentBuilder setStyle( String styleIn ) {
+        if ( styleIn == null ) {
             return this;
         }
-        this.style = "style=\"" + style + "\"";
+        if ( this.style != null ) {
+            styleIn = this.style.replace( "style=\"" , "" ).replace( "\"" , "" ) + ";" + styleIn;
+        }
+        this.style = "style=\"" + styleIn + "\"";
         return this;
     }
 
