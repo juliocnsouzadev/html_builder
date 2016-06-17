@@ -38,6 +38,7 @@ public class H extends HtmlComponentBuilder {
     public String build() {
         return getBuilder().append( "<" )
                 .append( type.value )
+                .append( " " )
                 .append( getAttributes() )
                 .append( ">" )
                 .append( getComponentContent() )
